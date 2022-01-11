@@ -1,14 +1,11 @@
 import express from "express";
+import controller from "../controller";
 
 const router = express.Router();
 
 router
   .route("/")
-  .get((req, res) => {
-    res.send("Hello World!");
-  })
-  .post((req, res) => {
-    res.send("Hello World!");
-  });
+  .get(controller.api.getData)
+  .post(controller.api.updateServer);
 
 export default router;
