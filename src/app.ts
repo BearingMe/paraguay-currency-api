@@ -1,10 +1,15 @@
 import "dotenv/config";
 import express from "express";
 import routes from "./routes";
+import path from "path";
 import db from "./db";
 
 const app = express();
 const port = process.env.PORT || 3000;
+const staticPath = path.join(__dirname, "./public");
+
+// load middlewares
+app.use(express.static(staticPath));
 
 // set up routes
 app.use("/api/v1", routes.api);

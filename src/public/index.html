@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Document</title>
+
+  <!-- vue cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- axios cdn -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="./assets/css/mdb.dark.min.css">
+
+  <style>
+    .container {
+      max-width: 768px !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="row mx-3">
+        <!-- best currency  -->
+        <div class="card mt-4 mt-md-5 p-0">
+          <div class="card-header">
+            <div class="d-flex justify-content-center my-2">
+              <h4 class="card-header-title ml-2 font-weight-bold m-0"> Best Currency </h4>
+            </div>
+          </div>
+
+          <div class="card-body p-0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Coin</th>
+                  <th scope="col">Buy</th>
+                  <th scope="col">Sell</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(currency, index) in currency.best" :key="currency._id">
+                  <th scope="row"> {{ index + 1 }} </th>
+                  <th> {{ currency.coin }} </th>
+                  <th> {{ currency.buy }} </th>
+                  <th> {{ currency.sell }} </th>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+        <!-- general currency  -->
+        <div class="card mt-4 mt-md-5 p-0" v-for="(general, index) in currency.general" :key="general._id">
+          <div class="card-header">
+            <div class="d-flex justify-content-center my-2">
+              <h4 class="card-header-title ml-2 font-weight-bold m-0"> {{ general.coin }} </h4>
+            </div>
+          </div>
+
+          <div class="card-body p-0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Coin</th>
+                  <th scope="col">Buy</th>
+                  <th scope="col">Sell</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(currency, index) in general.company" :key="currency._id">
+                  <th scope="row"> {{ index + 1 }} </th>
+                  <th> {{ currency.name }} </th>
+                  <th> {{ currency.buy }} </th>
+                  <th> {{ currency.sell }} </th>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+
+      data: {
+        currency: []
+      },
+
+      mounted: function () {
+        axios
+          .get("./api/v1")
+          .then(r => this.currency = r.data[0])
+          .catch(e => console.log('error', e))
+      },
+    })
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
