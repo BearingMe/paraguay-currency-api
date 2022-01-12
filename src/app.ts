@@ -18,6 +18,7 @@ app.use("/api/v1", routes.api);
 app.get("/", (req, res) => res.redirect("/api/v1"));
 
 // update server
+updater();
 setInterval(updater, 21600000);
 
 // set up database

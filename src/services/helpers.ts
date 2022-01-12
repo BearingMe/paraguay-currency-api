@@ -1,5 +1,4 @@
 import axios from "axios";
-import cheerios from "cheerio";
 import { Cheerio, CheerioAPI } from "cheerio";
 
 export async function getHtml(url: string) {
