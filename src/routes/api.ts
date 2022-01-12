@@ -3,9 +3,6 @@ import controller from "../controller";
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(controller.api.getData)
-  .post(controller.api.updateServer);
+router.route("/").get(controller.api.getData);
 
 export default router;
